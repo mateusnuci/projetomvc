@@ -17,17 +17,21 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/produtos/form">Cadastrar Prod</a>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Cadastrar</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/categorias/form">Categoria</a></li>
+            <li><a class="dropdown-item" href="/produtos/form">Produto</a></li>
+          </ul>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/produtos">Produtos</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/categorias/form">Cadastrar Cat</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/categorias">Categorias</a>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Listar</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/categorias">Categoria</a></li>
+            <li><a class="dropdown-item" href="/produtos">Produto</a></li>
+          </ul>
         </li>
 
       </ul>
