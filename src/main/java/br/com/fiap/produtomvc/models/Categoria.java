@@ -1,4 +1,3 @@
-
 package br.com.fiap.produtomvc.models;
 
 import jakarta.persistence.*;
@@ -26,6 +25,7 @@ public class Categoria {
 
     @NotBlank(message = "Campo requerido")
     @Size(min = 3, message = "O nome deve ter no mínimo 3 carateres")
+    @Column(length = 150,nullable = false)
     private String nome;
 
     //Relacionamento
