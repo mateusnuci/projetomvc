@@ -1,4 +1,3 @@
-
 INSERT INTO tb_categoria(id,nome) VALUES(categoria_seq.NEXTVAL,'Smartphone');
 INSERT INTO tb_categoria(id,nome) VALUES(categoria_seq.NEXTVAL,'Smart TV');
 INSERT INTO tb_categoria(id,nome) VALUES(categoria_seq.NEXTVAL,'Notebook');
