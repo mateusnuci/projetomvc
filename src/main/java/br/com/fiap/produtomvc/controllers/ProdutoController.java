@@ -4,6 +4,8 @@ import br.com.fiap.produtomvc.models.Categoria;
 import br.com.fiap.produtomvc.models.Produto;
 import br.com.fiap.produtomvc.repository.CategoriaRepository;
 import br.com.fiap.produtomvc.repository.ProdutoRepository;
+import br.com.fiap.produtomvc.services.CategoriaService;
+import br.com.fiap.produtomvc.services.ProdutoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +23,12 @@ import java.util.List;
 @RequestMapping("/produtos")
 public class ProdutoController {
     @Autowired
+    private ProdutoService produtoService;
+
+    @Autowired
+    private CategoriaService categoriaService;
+
+    @Autowired
     private ProdutoRepository repository;
 
     @Autowired
@@ -30,10 +38,10 @@ public class ProdutoController {
     // para popular comboBox
     @ModelAttribute("categorias")
     public List<Categoria> categorias() {
-        return categoriaRepository.findAll();
+        return categoriaService.findAll();
     }
 
-
+    // terminar
 
 
 
