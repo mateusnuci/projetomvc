@@ -27,13 +27,7 @@ public class ProdutoController {
 
     @Autowired
     private CategoriaService categoriaService;
-
-    @Autowired
-    private ProdutoRepository repository;
-
-    @Autowired
-    private CategoriaRepository categoriaRepository;
-
+    
     // adicionando atributo "categorias" do model
     // para popular comboBox
     @ModelAttribute("categorias")
@@ -53,33 +47,30 @@ public class ProdutoController {
     }
 
     @PostMapping()
-    @Transactional
+    //@Transactional
     public String insert(@Valid Produto produto,
                                 BindingResult result,
                                 RedirectAttributes attributes) {
         if(result.hasErrors()){
             return "produto/novo-produto";
         }
-        repository.save(produto);
+        produtoService.insert(produto);
         attributes.addFlashAttribute("mensagem", "Produto salvo com sucesso");
         return "redirect:/produtos/form";
     }
 
     //URL - localhost:8080/produtos/listar
     @GetMapping()
-    @Transactional(readOnly = true)
     public String findAll(Model model){
-        model.addAttribute("produtos", repository.findAll());
+        List<Produto> produtos = produtoService.findAll();
+        model.addAttribute("produtos", produtos);
         return "/produto/listar-produtos"; //View
     }
 
     //URL - localhost:8080/produtos/editar/1
     @GetMapping("/{id}")
-    @Transactional(readOnly = true)
     public String findById(@PathVariable ("id") Long id, Model model ){
-        Produto produto = repository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException("Produto inválido - id: " + id)
-        );
+        Produto produto = produtoService.findById(id);
         model.addAttribute("produto", produto);
         return "/produto/editar-produto";
     }
@@ -93,22 +84,14 @@ public class ProdutoController {
             produto.setId(id);
             return "/produto/editar-produto";
         }
-        repository.save(produto);
+        produtoService.update(id, produto);
         return "redirect:/produtos";
     }
 
     //URL - localhost:8080/produtos/deletar/1
     @DeleteMapping("/{id}")
-    @Transactional
     public String delete(@PathVariable("id") Long id, Model model){
-        if(!repository.existsById(id)){
-            throw new IllegalArgumentException("Produto inválido - id: " + id);
-        }
-        try {
-            repository.deleteById(id);
-        } catch (Exception e){
-            throw new IllegalArgumentException("Produto inválido - id: " + id);
-        }
+        produtoService.delete(id);
         return "redirect:/produtos";
     }
 }

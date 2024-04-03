@@ -53,7 +53,7 @@ public class ProdutoService {
     @Transactional(readOnly = true)
     public void delete(Long id) {
         if(!repository.existsById(id)){
-            throw new IllegalArgumentException("Recurso inválida - id: " + id);
+            throw new IllegalArgumentException("Recurso inválido - id: " + id);
         }
         try {
             repository.deleteById(id);

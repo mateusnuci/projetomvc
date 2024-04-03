@@ -36,17 +36,14 @@ public class CategoriaController {
         if(result.hasErrors()){
             return "categoria/novo-categoria";
         }
-        //repository.save(categoria);
-        categoria = service.insert(categoria);
+        service.insert(categoria);
         attributes.addFlashAttribute("mensagem", "Categoria salva com sucesso");
         return "redirect:/categorias/form"; // endpoint
     }
 
     @GetMapping()
-    //@Transactional(readOnly = true) responsabilidade do service mexer com o banco
     public String findAll(Model model){
         List<Categoria> categorias = service.findAll();
-        //model.addAttribute("categorias", repository.findAll());
         model.addAttribute("categorias", categorias);
         return "/categoria/listar-categorias"; //View
     }
@@ -65,14 +62,12 @@ public class CategoriaController {
             categoria.setId(id);
             return "/categoria/editar-categoria";
         }
-        //repository.save(categoria);
         service.update(id, categoria);
         return "redirect:/categorias";
     }
 
 
     @DeleteMapping("/{id}")
-    @Transactional
     public String delete(@PathVariable("id") Long id){
         service.delete(id);
         return "redirect:/categorias";
